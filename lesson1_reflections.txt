@@ -1,0 +1,26 @@
+The diff command using the -u option, displays the changes as well as the surrounding lines to help with orientation.
+
+Having the history of all the changes to a file allows you to explore new ideas but also keeping working version incase you change directions and go back to what is working.
+
+A commit is a snapshot of all the files in your repo
+  git log --stat gives statistics about the files
+  git diff
+
+Git allows multi-file commits to group all the files for that revision
+
+git log show the comment of each commit and git diff shows the changes between each commit.
+
+git checkout <commit id> - to get previous version
+
+command shif-h to get to home dir on Mac
+
+With git you can always revert back to a working version.
+
+Version Control
+	Git
+    <-part of-Repo
+      <-works with-clone
+      <-part of-commit
+        <-works with-diff
+        <-works with-log
+	
