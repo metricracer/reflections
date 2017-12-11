@@ -1,0 +1,225 @@
+$ git remote
+
+$ git remote add origin https://github.com/metricracer/reflections.git
+Note: "origin" could be any name.  "origin" is just a standard.
+
+# Now run "git remote"
+$ git remote
+origin
+
+# For more information:
+metricracer:~/workspace/class/reflections (master) $ git remote -v
+origin  https://github.com/metricracer/reflections.git (fetch)
+origin  https://github.com/metricracer/reflections.git (push)
+
+# Now push your initial changes:
+metricracer:~/workspace/class/reflections (master) $ git push origin master
+Username for 'https://github.com': metricracer@gmail.com
+Password for 'https://metricracer@gmail.com@github.com': 
+Counting objects: 6, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 1.29 KiB | 0 bytes/s, done.
+Total 6 (delta 0), reused 0 (delta 0)
+To https://github.com/metricracer/reflections.git
+ * [new branch]      master -> master
+
+# Getting latest changes:
+metricracer:~/workspace/class/reflections (master) $ git pull origin master remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 9 (delta 3), reused 2 (delta 0), pack-reused 0
+Unpacking objects: 100% (9/9), done.
+From https://github.com/metricracer/reflections
+ * branch            master     -> FETCH_HEAD
+   ec9baa3..87c8df5  master     -> origin/master
+Updating ec9baa3..87c8df5
+Fast-forward
+ lesson3_reflections.txt         | 29 +++++++++++++++++++++++++++++
+ lesson_3_reflection_prompts.txt | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
+ create mode 100644 lesson3_reflections.txt
+ create mode 100644 lesson_3_reflection_prompts.txt
+
+# Push more changes directly to the master branch (big no no):
+metricracer:~/workspace/class/reflections (master) $ git push origin master
+Username for 'https://github.com': metricracer@gmail.com
+Password for 'https://metricracer@gmail.com@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 410 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/metricracer/reflections.git
+   87c8df5..e0f6b7f  master -> master
+
+# Fork someone elses changes on GitHub
+# Clone it to your local workarea:
+macminiserver:source darthvader$ git clone https://github.com/metricracer/recipes.git
+Cloning into 'recipes'...
+remote: Counting objects: 16, done.
+remote: Total 16 (delta 0), reused 0 (delta 0), pack-reused 16
+Unpacking objects: 100% (16/16), done.
+macminiserver:source darthvader$ ls
+license		recipes		reflections
+
+# Display the remote settings for recipes:
+metricracer:~/workspace/class/recipes (master) $ git remote -v
+origin  https://github.com/metricracer/recipes.git (fetch)
+origin  https://github.com/metricracer/recipes.git (push)
+
+# Merging remote changes:
+# git pull origin master => git fetch origin; git merge master origin/master
+metricracer:~/workspace/class/recipes (master) $ git merge master origin/mas
+ter
+Auto-merging chili-recipe.txt
+CONFLICT (content): Merge conflict in chili-recipe.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+# Edit file and merge differences by hand
+metricracer:~/workspace/class/recipes (master|MERGING) $ vi chili-recipe.txt 
+# Now check status
+metricracer:~/workspace/class/recipes (master|MERGING) $ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 1 and 3 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both modified:   chili-recipe.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+# Add and commit the merged changes
+metricracer:~/workspace/class/recipes (master|MERGING) $ git add chili-recipe.txt 
+metricracer:~/workspace/class/recipes (master|MERGING) $ git commit -m "Cleaned up chili recipe"
+[master daf4bc2] Cleaned up chili recipe
+
+# Test running the combo "git pull origin to master" - (nothing will happen)
+metricracer:~/workspace/class/recipes (master) $ git pull origin master
+From https://github.com/metricracer/recipes
+ * branch            master     -> FETCH_HEAD
+Already up-to-date.
+
+# Now push the merged changes to GitHub
+metricracer:~/workspace/class/recipes (master) $ git push origin master
+Username for 'https://github.com': metricracer@gmail.com
+Password for 'https://metricracer@gmail.com@github.com': 
+Counting objects: 6, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 625 bytes | 0 bytes/s, done.
+Total 6 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 2 local objects.
+To https://github.com/metricracer/recipes.git
+   b1e2437..daf4bc2  master -> master
+
+# Check the status again:
+metricracer:~/workspace/class/recipes (master) $ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+
+# Making a Pull Request
+# First start by making a branch
+$ git branch different-oil
+$ git checkout different-oil
+or
+$ git checkout -b different-oil
+
+# Make change
+# Add
+# Commit
+# push "different-oil"
+
+# Merge new changes into your work area
+# Pull changes into your local master branch
+# First switch to your master branch
+$ git checkout master
+
+# Pull a copy of origin/master and merge with your master
+macminiserver:recipes darthvader$ git pull origin master
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/metricracer/recipes
+ * branch            master     -> FETCH_HEAD
+   daf4bc2..393e4e1  master     -> origin/master
+Updating daf4bc2..393e4e1
+Fast-forward
+ cake-recipe.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+# Next, merge new master changes in to the "different-oil" branch
+# Swich to your "different-oil" branch
+macminiserver:recipes darthvader$ git checkout different-oil
+Switched to branch 'different-oil'
+
+# Now try merging:
+macminiserver:recipes darthvader$ git merge master different-oil
+Auto-merging cake-recipe.txt
+CONFLICT (content): Merge conflict in cake-recipe.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+# Edit file and merge the changes manually
+$ vi cake-recipe.txt
+
+# Add and commit the local merge/changes
+macminiserver:recipes darthvader$ git add cake-recipe.txt 
+macminiserver:recipes darthvader$ git commit
+[different-oil 0ac9cf3] Merge branch 'master' into different-oil
+
+# Push the latest changes to "different-oil" to GitHub
+macminiserver:recipes darthvader$ git push origin different-oil
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 340 bytes | 340.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/metricracer/recipes.git
+   8845bbf..0ac9cf3  different-oil -> different-oil
+
+# Merge the "Green" changes to GitHub's master from the GUI
+
+# Pull the "origin/master" changes and merge to your local master
+macminiserver:recipes darthvader$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+macminiserver:recipes darthvader$ git pull
+remote: Counting objects: 1, done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), done.
+From https://github.com/metricracer/recipes
+   393e4e1..04439a8  master     -> origin/master
+Updating 393e4e1..04439a8
+Fast-forward
+ cake-recipe.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+# merging changes
+# Add another remote
+$ git remote add upstream https://github.com/udacity/create-your-own-adventure.git
+
+# merge local master with upstream
+$ git pull upstream master
+
+# Switch back you your branch
+$ git merge master stop-drop-roll
+
+# Resolve merge conflict
+$ vi fire.md
+$ git commit
+
+# Push changes
+$ git push origin stop-drop-roll
+
+# Push master branch as well
+$ git checkout master
+$ git push
